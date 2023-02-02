@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:5.0.4.RELEASE'
+
+    compile project (':Services')
+    compile project (':Persistence')
+}
+
+mainClassName='StartServer'

@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly('javax.persistence:javax.persistence-api:2.2')
+    implementation('org.hibernate:hibernate-entitymanager:5.4.18.Final')
+    compile project (':Persistence')
+}
