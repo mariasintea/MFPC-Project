@@ -1,8 +1,8 @@
 package services;
 
 import domain.*;
-import repository.OrdersRepository;
-import repository.ProductsRepository;
+import repository.TripsRepository;
+import repository.HikesRepository;
 import repository.UsersRepository;
 import services.observer.Observer;
 
@@ -13,40 +13,40 @@ import java.util.concurrent.Executors;
 
 public class Service implements IService {
     List<Observer> observers;
-    ProductsRepository productRepository;
-    UsersRepository userRepository;
-    OrdersRepository orderRepository;
+    HikesRepository hikesRepository;
+    UsersRepository usersRepository;
+    TripsRepository tripsRepository;
 
-    public Service(ProductsRepository productRepository, UsersRepository userRepository, OrdersRepository orderRepository) {
+    public Service(HikesRepository hikesRepository, UsersRepository usersRepository, TripsRepository tripsRepository) {
         observers = new ArrayList<>();
-        this.productRepository = productRepository;
-        this.userRepository = userRepository;
-        this.orderRepository = orderRepository;
+        this.hikesRepository = hikesRepository;
+        this.usersRepository = usersRepository;
+        this.tripsRepository = tripsRepository;
     }
 
     public synchronized String checkUser(String username, String password){
-        User user = userRepository.findUser(username, password);
+        User user = usersRepository.findUser(username, password);
         if (user == null)
             return "nonexistent";
         return user.getRole();
     }
 
-    public synchronized Product findProduct(String name){
-        return productRepository.findProduct(name);
+    public synchronized Hike findHike(String name){
+        return hikesRepository.findHike(name);
     }
 
-    public synchronized int addOrder(int address){
-        Order order = new Order(0, address);
-        return orderRepository.addOrder(order);
+    public synchronized int addTrip(String date){
+        Trip trip = new Trip(0, date);
+        return tripsRepository.addTrip(trip);
     }
 
-    public synchronized void addProductToOrder(int orderId, int productId, int quantity){
+    public synchronized void addHikeToTrip(int tripId, int hikeId, int noPersons){
         try{
-            ProductsInOrder productsInOrder = new ProductsInOrder(0, orderId, productId, quantity);
-            orderRepository.addProductInOrder(productsInOrder);
-            Product product = productRepository.findProduct(productId);
-            product.extractFromQuantity(quantity);
-            productRepository.update(product);
+            HikesInTrip hikesInTrip = new HikesInTrip(0, tripId, hikeId, noPersons);
+            tripsRepository.addHikeInTrip(hikesInTrip);
+            Hike hike = hikesRepository.findHike(hikeId);
+            hike.extractFromSpots(noPersons);
+            hikesRepository.update(hike);
             notifyObservers();
         }
         catch (Exception e){
@@ -55,18 +55,13 @@ public class Service implements IService {
     }
 
     public synchronized double getTotalPrice(int orderId){
-        return orderRepository.getTotal(orderId);
+        return tripsRepository.getTotal(orderId);
     }
 
-    public synchronized int addAddress(String street, int number, String city, String county, String country){
-        Address newAddress = new Address(0, street, number, city, county, country);
-        return orderRepository.addAddress(newAddress);
-    }
-
-    public synchronized void addProduct(String name, double price, int quantity){
+    public synchronized void addHike(String name, double price, int availableSpots, String guide, String location){
         try{
-            Product newProduct = new Product(0, name, price, quantity);
-            productRepository.add(newProduct);
+            Hike newHike = new Hike(0, name, price, availableSpots, guide, location);
+            hikesRepository.add(newHike);
             notifyObservers();
         }
         catch (Exception e){
@@ -74,10 +69,10 @@ public class Service implements IService {
         }
     }
 
-    public synchronized void updateProduct(int id, String name, double price, int quantity){
+    public synchronized void updateHike(int id, String name, double price, int availableSpots, String guide, String location){
         try{
-            Product newProduct = new Product(id, name, price, quantity);
-            productRepository.update(newProduct);
+            Hike newHike = new Hike(id, name, price, availableSpots, guide, location);
+            hikesRepository.update(newHike);
             notifyObservers();
         }
         catch (Exception e){
@@ -85,10 +80,10 @@ public class Service implements IService {
         }
     }
 
-    public synchronized void deleteProduct(int id, String name, double price, int quantity){
+    public synchronized void deleteHike(int id, String name, double price, int availableSpots, String guide, String location){
         try{
-            Product newProduct = new Product(id, name, price, quantity);
-            productRepository.delete(newProduct);
+            Hike newHike = new Hike(id, name, price, availableSpots, guide, location);
+            hikesRepository.delete(newHike);
             notifyObservers();
         }
         catch (Exception e){
@@ -96,13 +91,9 @@ public class Service implements IService {
         }
     }
 
-    /**
-     * selects all products from database
-     * @return list of existing products
-     */
-    public synchronized List<Product> getAllProducts(){
-        List<Product> products = productRepository.getAll();
-        return products;
+    public synchronized List<Hike> getAllHikes(){
+        List<Hike> hikes = hikesRepository.getAll();
+        return hikes;
     }
 
     @Override

@@ -12,9 +12,6 @@ public class HibernateUtils {
 
     }
 
-    /**
-     * initializes session
-     */
     public static void initialize() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         try {
@@ -30,9 +27,6 @@ public class HibernateUtils {
         return sessionFactory;
     }
 
-    /**
-     * closes session
-     */
     public static void close(){
         if ( sessionFactory != null ) {
             sessionFactory.close();

@@ -1,6 +1,6 @@
 package controllers;
 
-import domain.Product;
+import domain.Hike;
 import services.IService;
 
 import java.io.Serializable;
@@ -9,16 +9,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 public class MainPageAdministratorController extends UnicastRemoteObject implements Serializable {
-    Product selectedProduct;
+    Hike selectedHike;
     IService service;
 
     public MainPageAdministratorController() throws RemoteException {
     }
 
-    /**
-     * makes the set up for controller
-     * @param service - current service
-     */
     public void setUp(IService service){
         this.service = service;
     }
@@ -27,19 +23,17 @@ public class MainPageAdministratorController extends UnicastRemoteObject impleme
         return service;
     }
 
-    public void setSelectedProduct(Product product) {
-        this.selectedProduct = product;
+    public void setSelectedHike(Hike hike) {
+        this.selectedHike = hike;
     }
 
-    public List<Product> getProducts() {
-        List<Product> productList = service.getAllProducts();
-        return productList;
+    public List<Hike> getHikes() {
+        List<Hike> hikesList = service.getAllHikes();
+        return hikesList;
     }
 
-    /**
-     * deletes selected Product from database
-     */
     public void handleDelete() {
-        service.deleteProduct(selectedProduct.getId(), selectedProduct.getName(), selectedProduct.getPrice(), selectedProduct.getAvailableQuantity());
+        service.deleteHike(selectedHike.getId(), selectedHike.getName(), selectedHike.getPrice(),
+                selectedHike.getAvailableSpots(), selectedHike.getGuide(), selectedHike.getLocation());
     }
 }

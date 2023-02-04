@@ -24,15 +24,15 @@ public class LogInView extends UnicastRemoteObject implements Serializable {
     PasswordField password;
     LogInController controller;
     Parent parentAdministratorView;
-    Parent parentSalesmanView;
+    Parent parentClientView;
 
     public LogInView() throws RemoteException {
     }
 
-    public void setUp(LogInController controller, Parent parentAdministratorView, Parent parentSalesmanView) {
+    public void setUp(LogInController controller, Parent parentAdministratorView, Parent parentClientView) {
         this.controller = controller;
         this.parentAdministratorView = parentAdministratorView;
-        this.parentSalesmanView = parentSalesmanView;
+        this.parentClientView = parentClientView;
     }
 
     public void handleLogIn(ActionEvent event) {
@@ -56,9 +56,9 @@ public class LogInView extends UnicastRemoteObject implements Serializable {
                 }
 
                 Stage stage = new Stage();
-                stage.setTitle("Sales Company -  logged as " + username.getText() + ", " + role);
-                if(role.equals("salesman"))
-                    stage.setScene(new Scene(parentSalesmanView));
+                stage.setTitle("Trips Company -  logged as " + username.getText() + ", " + role);
+                if(role.equals("client"))
+                    stage.setScene(new Scene(parentClientView));
                 else
                     stage.setScene(new Scene(parentAdministratorView));
 

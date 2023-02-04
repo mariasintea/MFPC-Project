@@ -8,22 +8,22 @@
     <bean id="usersRepository" class="repository.UsersRepository">
         <constructor-arg ref="sessionFactory"/>
     </bean>
-    <bean id="ordersRepository" class="repository.OrdersRepository">
+    <bean id="tripsRepository" class="repository.TripsRepository">
         <constructor-arg ref="sessionFactory"/>
     </bean>
-    <bean id="productsRepository" class="repository.ProductsRepository">
+    <bean id="hikesRepository" class="repository.HikesRepository">
         <constructor-arg ref="sessionFactory"/>
     </bean>
 
 
     <bean id="service" class="services.Service">
         <constructor-arg ref="usersRepository"/>
-        <constructor-arg ref="productsRepository"/>
-        <constructor-arg ref="ordersRepository"/>
+        <constructor-arg ref="hikesRepository"/>
+        <constructor-arg ref="tripsRepository"/>
     </bean>
 
     <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
-        <property name="serviceName" value="SalesAgency"/>
+        <property name="serviceName" value="TripsAgency"/>
         <property name="service" ref="service"/>
         <property name="serviceInterface" value="services.IService"/>
         <property name="servicePort" value="1099"/>

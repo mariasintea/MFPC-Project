@@ -1,6 +1,6 @@
 package services;
 
-import domain.Product;
+import domain.Hike;
 import services.observer.Observable;
 
 import java.util.List;
@@ -8,21 +8,19 @@ import java.util.List;
 public interface IService extends Observable {
     String checkUser(String username, String password);
 
-    Product findProduct(String name);
+    Hike findHike(String name);
 
-    int addOrder(int address);
+    int addTrip(String date);
 
-    void addProductToOrder(int orderId, int productId, int quantity);
+    void addHikeToTrip(int tripId, int hikeId, int noPersons);
 
-    double getTotalPrice(int orderId);
+    double getTotalPrice(int tripId);
 
-    int addAddress(String street, int number, String city, String county, String country);
+    void addHike(String name, double price, int availableSpots, String guide, String location);
 
-    void addProduct(String name, double price, int quantity);
+    void updateHike(int id, String name, double price, int availableSpots, String guide, String location);
 
-    void updateProduct(int id, String name, double price, int quantity);
+    void deleteHike(int id, String name, double price, int availableSpots, String guide, String location);
 
-    void deleteProduct(int id, String name, double price, int quantity);
-
-    List<Product> getAllProducts();
+    List<Hike> getAllHikes();
 }

@@ -1,6 +1,6 @@
 package controllers;
 
-import domain.Product;
+import domain.Hike;
 import services.IService;
 
 import java.io.Serializable;
@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class AddUpdateController  extends UnicastRemoteObject implements Serializable {
     IService service;
     String operation;
-    Product selectedProduct;
+    Hike selectedHike;
 
     public AddUpdateController() throws RemoteException{
     }
@@ -20,20 +20,21 @@ public class AddUpdateController  extends UnicastRemoteObject implements Seriali
         this.operation = operation;
     }
 
-    public void setSelectedProduct(Product product) {
-        this.selectedProduct = product;
+    public void setSelectedHike(Hike hike) {
+        this.selectedHike = hike;
     }
 
-    public Product getSelectedProduct() {
-        return selectedProduct;
+    public Hike getSelectedHike() {
+        return selectedHike;
     }
 
-    public void handleSendResponse(String name, String price, String quantity){
+    public void handleSendResponse(String name, String price, String availableSpots, String location, String guide){
         if(operation.equals("update")) {
-            service.updateProduct(selectedProduct.getId(), name, Double.valueOf(price), Integer.parseInt(quantity));
+            service.updateHike(selectedHike.getId(), name, Double.valueOf(price), Integer.parseInt(availableSpots),
+                    guide, location);
         }
         else{
-            service.addProduct(name, Double.valueOf(price), Integer.parseInt(quantity));
+            service.addHike(name, Double.valueOf(price), Integer.parseInt(availableSpots), guide, location);
         }
     }
 }

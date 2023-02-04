@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import domain.Product;
+import domain.Hike;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -25,49 +25,43 @@ public class AddUpdateView extends UnicastRemoteObject implements Serializable {
     @FXML
     TextField priceField;
     @FXML
-    TextField quantityField;
+    TextField availableSpotsField;
+    @FXML
+    TextField locationField;
+    @FXML
+    TextField guideField;
     AddUpdateController controller;
 
     public AddUpdateView() throws RemoteException {
     }
 
-    /**
-     * makes the set up for controller
-     * @param controller - current controller
-     */
     public void setUp(String operation, AddUpdateController controller){
         this.controller = controller;
         switch (operation){
             case "add": {
                 sendButton.setText("Add");
-                title.setText("Add Product");
+                title.setText("Add Hike");
             }break;
             case "update": {
                 sendButton.setText("Update");
-                title.setText("Update Product");
-                setSelectedProduct();
+                title.setText("Update Hike");
+                setSelectedHike();
             }break;
         }
     }
 
-    /**
-     * sets fills fields with selected Product's info
-     */
-    public void setSelectedProduct(){
-        Product product = controller.getSelectedProduct();
-        nameField.setText(product.getName());
-        priceField.setText(String.valueOf(product.getPrice()));
-        quantityField.setText(String.valueOf(product.getAvailableQuantity()));
+    public void setSelectedHike(){
+        Hike hike = controller.getSelectedHike();
+        nameField.setText(hike.getName());
+        priceField.setText(String.valueOf(hike.getPrice()));
+        availableSpotsField.setText(String.valueOf(hike.getAvailableSpots()));
+        locationField.setText(hike.getLocation());
+        guideField.setText(hike.getGuide());
     }
 
-    /**
-     * creates Product object and adds/updates it in the database
-     * closes window if successful
-     * shows error message if not successful
-     * @param event - ActionEvent
-     */
     public void handleSendResponse(ActionEvent event) {
-        if(nameField.getText().equals("") || priceField.getText().equals("") || quantityField.getText().equals(""))
+        if(nameField.getText().equals("") || priceField.getText().equals("") || availableSpotsField.getText().equals("")
+                || locationField.getText().equals("") || guideField.getText().equals(""))
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR!");
@@ -76,7 +70,8 @@ public class AddUpdateView extends UnicastRemoteObject implements Serializable {
             return;
         }
 
-        controller.handleSendResponse(nameField.getText(), priceField.getText(), quantityField.getText());
+        controller.handleSendResponse(nameField.getText(), priceField.getText(), availableSpotsField.getText(),
+                locationField.getText(), guideField.getText());
 
         Node node = (Node) event.getSource();
         Stage thisStage = (Stage) node.getScene().getWindow();

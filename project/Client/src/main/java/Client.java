@@ -1,6 +1,6 @@
 import controllers.LogInController;
 import controllers.MainPageAdministratorController;
-import controllers.MainPageSalesmanController;
+import controllers.MainPageClientController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import services.IService;
 import views.LogInView;
 import views.MainPageAdministratorView;
-import views.MainPageSalesmanView;
+import views.MainPageClientView;
 
 public class Client extends Application {
 
@@ -27,12 +27,12 @@ public class Client extends Application {
         MainPageAdministratorView viewAdministrator = loaderMainPageAdministrator.getController();
         viewAdministrator.setUp(controllerAdministrator);
 
-        FXMLLoader loaderMainPageSalesman = new FXMLLoader(getClass().getResource("/fxml/MainPageSalesman.fxml"));
-        MainPageSalesmanController controllerSalesman = new MainPageSalesmanController();
-        controllerSalesman.setUp(service);
-        Parent rootSalesman = loaderMainPageSalesman.load();
-        MainPageSalesmanView viewSalesman = loaderMainPageSalesman.getController();
-        viewSalesman.setUp(controllerSalesman);
+        FXMLLoader loaderMainPageClient = new FXMLLoader(getClass().getResource("/fxml/MainPageClient.fxml"));
+        MainPageClientController controllerClient = new MainPageClientController();
+        controllerClient.setUp(service);
+        Parent rootSalesman = loaderMainPageClient.load();
+        MainPageClientView viewClient = loaderMainPageClient.getController();
+        viewClient.setUp(controllerClient);
 
         FXMLLoader loaderLogin = new FXMLLoader(getClass().getResource("/fxml/LogInPage.fxml"));
         Parent root = loaderLogin.load();

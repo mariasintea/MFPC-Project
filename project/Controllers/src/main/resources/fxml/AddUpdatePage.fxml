@@ -4,28 +4,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AddUpdateView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AddUpdateView">
    <children>
       <Button fx:id="sendButton" layoutX="240.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleSendResponse" prefHeight="25.0" prefWidth="120.0" text="Add/Update" />
-      <Label layoutX="164.0" layoutY="145.0" text="Name">
+      <Label layoutX="159.0" layoutY="95.0" text="Name">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="164.0" layoutY="201.0" text="Price">
+      <Label layoutX="158.0" layoutY="135.0" text="Price">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="164.0" layoutY="255.0" text="Quantity">
+      <Label layoutX="158.0" layoutY="175.0" text="Available Spots">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="nameField" layoutX="296.0" layoutY="147.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextField fx:id="priceField" layoutX="296.0" layoutY="203.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextField fx:id="quantityField" layoutX="296.0" layoutY="257.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label fx:id="title" layoutX="164.0" layoutY="79.0" text="Add/Update Product">
+      <Label layoutX="158.0" layoutY="215.0" text="Location">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="158.0" layoutY="255.0" text="Guide">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameField" layoutX="300.0" layoutY="97.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="priceField" layoutX="300.0" layoutY="137.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="availableSpotsField" layoutX="300.0" layoutY="177.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="locationField" layoutX="300.0" layoutY="217.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="guideField" layoutX="300.0" layoutY="257.0" prefHeight="25.0" prefWidth="200.0" />
+      <Label fx:id="title" layoutX="180.0" layoutY="41.0" text="Add/Update Hike">
          <font>
             <Font size="30.0" />
          </font>

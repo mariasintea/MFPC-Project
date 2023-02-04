@@ -5,7 +5,7 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/salesagency</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/mountain_trips</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">10110100</property>
@@ -16,10 +16,9 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-        <mapping resource="domain/Product.hbm.xml"/>
-        <mapping resource="domain/Order.hbm.xml"/>
+        <mapping resource="domain/Hike.hbm.xml"/>
+        <mapping resource="domain/Trip.hbm.xml"/>
         <mapping resource="domain/User.hbm.xml"/>
-        <mapping resource="domain/ProductsInOrder.hbm.xml"/>
-        <mapping resource="domain/Address.hbm.xml"/>
+        <mapping resource="domain/HikesInTrip.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

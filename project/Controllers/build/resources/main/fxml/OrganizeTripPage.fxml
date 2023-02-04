@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.OrganizeTripView">
+   <children>
+      <Label layoutX="47.0" layoutY="40.0" text="List of Hikes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="85.0" text="Hike">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="hikesNamesList" layoutX="100.0" layoutY="86.0" prefHeight="25.0" prefWidth="120.0" />
+      <Button layoutX="472.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleAddHike" text="Add to List" />
+      <Label layoutX="240.0" layoutY="85.0" prefHeight="27.0" prefWidth="120.0" text="No of Persons">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="quantityField" layoutX="364.0" layoutY="86.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label layoutX="47.0" layoutY="128.0" text="Added Hikes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="hikesTable" layoutX="44.0" layoutY="158.0" prefHeight="121.0" prefWidth="512.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="41.00001525878906" text="id" />
+            <TableColumn fx:id="nameColumn" prefWidth="95.33330535888672" text="name" />
+            <TableColumn fx:id="priceColumn" prefWidth="67.33335876464844" text="price" />
+            <TableColumn fx:id="availableSpotsColumn" prefWidth="110.00004577636719" text="available spots" />
+            <TableColumn fx:id="guideColumn" prefWidth="81.0" text="guide" />
+            <TableColumn fx:id="locationColumn" prefWidth="128.99996948242188" text="location" />
+         </columns>
+      </TableView>
+      <Button layoutX="225.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleOrganizeTrip" prefHeight="25.0" prefWidth="150.0" text="Organize Trip" />
+      <Label layoutX="47.0" layoutY="297.0" prefHeight="27.0" prefWidth="120.0" text="Start Date">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="dateField" layoutX="140.0" layoutY="298.0" prefHeight="25.0" prefWidth="107.0" />
+   </children>
+</AnchorPane>
